@@ -16,29 +16,21 @@ The default credentials for the image are user **pirate** with password **hyprio
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|------------|
 | Description   | Download Link                                                                                                                                                                                                                                            | Description                       | Published  |
 | Version 1.9.0 | [hypriotos-rpi-v1.9.0.img.zip](https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip) [Checksum](https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip.sha256) | Docker 18.04.0-ce, kernel 4.14.34 | 28.04.2018 |
+I used [Etcher](https://github.com/resin-io/etcher/releases/download/v1.3.1/Etcher-Setup-1.3.1-x64.exe) to write this image.
+I plugged the Raspi into Ethernet, a power plug, and a few seconds later tried
 
-myLogin@myMachine ~
-
+```
 $ ssh pirate@black-pearl
-
 pirate@black-pearl's password:
-
 Linux black-pearl 4.14.34-hypriotos-v7+ \#1 SMP Sun Apr 22 14:57:31 UTC 2018 armv7l
-
 HypriotOS (Debian GNU/Linux 9)
-
 The programs included with the Debian GNU/Linux system are free software;
-
 the exact distribution terms for each program are described in the
-
 individual files in /usr/share/doc/\*/copyright.
-
 Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-
 permitted by applicable law.
-
 HypriotOS/armv7: pirate**@**black-pearl** in **~
-
+```
 **$**
 
  ifconfig
