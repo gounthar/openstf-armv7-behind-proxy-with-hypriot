@@ -191,6 +191,35 @@ In the [openstf-arm7-docker](https://github.com/jonathas/openstf-arm7-docker) th
 
 So, 
 - change the IP with the one you found with `ifconfig` earlier.
+
+```
+version: "2"
+services:
+ stf:
+ image: openstf/stf-armv7l
+ privileged: true
+ container_name: openstf
+ depends_on:
+ - db
+ - adb
+ network_mode: host
+ command: "stf local --public-ip ip.of.your.raspberry"
+ db:
+ image: generalmeow/rethinkdb:1.0-arm
+ container_name: openstf_db
+ volumes:
+ - "./rethinkdb_data:/data"
+ network_mode: host
+ adb:
+ image: mitchtech/arm-adb
+ privileged: true
+ container_name: adb
+ network_mode: host
+networks:
+ default:
+ external:
+ name: "host"
+```
 - copy the docker-infra.service file from the systemd directory to /etc/systemd/system `$ sudo cp systemd/docker-infra.service /etc/systemd/system`
 - modify it so that it corresponds to your directory: 
 
@@ -218,64 +247,6 @@ WantedBy=default.target
 - start everything: `sudo systemctl start docker-infra`
 
 After everything is loaded, your server will be available on http://ip.of.your.raspberry:7100
-
-So :
-
-version: "2"
-
-services:
-
- stf:
-
- image: openstf/stf-armv7l
-
- privileged: true
-
- container\_name: openstf
-
- depends\_on:
-
- - db
-
- - adb
-
- network\_mode: host
-
- command: "stf local --public-ip ip.of.your.raspberry"
-
- db:
-
- image: generalmeow/rethinkdb:1.0-arm
-
- container\_name: openstf\_db
-
- volumes:
-
- - "./rethinkdb\_data:/data"
-
- network\_mode: host
-
- adb:
-
- image: mitchtech/arm-adb
-
- privileged: true
-
- container\_name: adb
-
- network\_mode: host
-
-networks:
-
- default:
-
- external:
-
- name: "host"
-
-et
-
-** **docker-compose up --build
 
 and… Tadaam :
 
