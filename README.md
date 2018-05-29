@@ -79,16 +79,23 @@ sudo chown -R pirate /DATA/
 ------------------------------
 
 ### <span id="anchor-3"></span>Proxy
+I'm unfortunate enough to work behind a proxy, so we will have to configure it at several places. Let's start with `apt` to fetch updates and install new packages
 
-** **sudo nano /etc/apt/apt.conf
+```
+sudo nano /etc/apt/apt.conf
+```
 
-**$ **cat /etc/apt/apt.conf
-
+in which you will find
+```
 Acquire::http::Proxy "http://your.proxy.host:proxyPort";
+```
 
 ### <span id="anchor-4"></span>curl-config
+We will then be able to install curl-config:
 
-**$ **sudo -E apt-get install --reinstall libcurl4-openssl-dev
+```
+sudo -E apt-get update && apt-get install --reinstall libcurl4-openssl-dev
+```
 
 ### <span id="anchor-5"></span>Certificates
 
