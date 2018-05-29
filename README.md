@@ -110,16 +110,17 @@ port=443
 trust_cert_file_location=`curl-config --ca`
 ```
 
-We'll try to import the github certificate on our machine. If you also have a proxy, put it on the command line:
-**$ **sudo bash -c "echo -n | openssl s\_client -proxy your.proxy.host:proxyPort -showcerts -connect $hostname:$port \\
+We'll try to import the github certificate on our machine. If you also have a proxy, put on the command line:
 
- 2&gt;/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \\
+```
+sudo bash -c "echo -n | openssl s\_client -proxy your.proxy.host:proxyPort -showcerts -connect $hostname:$port \\
+ 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \\
+ >>; $trust\_cert\_file\_location"
+```
+If you don't need any proxy, just get rid of the `-proxy` part.
 
- &gt;&gt; $trust\_cert\_file\_location"
-
-As it is not working yet, we do *export GIT\_SSL\_NO\_VERIFY=1*
-
-*The solution is written somewhere in *[*https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed*](https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed)* or *[*https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116\#35824116*](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116#35824116)*.*
+As it is not working yet, we do `export GIT_SSL_NO_VERIFY=1` which is not an pretty solution. We will have to investigate later on.
+The solution to this issue is written somewhere in [https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed](https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed)* or [https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116\#35824116](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116#35824116).
 
 HypriotOS/armv7: pirate@black-pearl in /DATA
 
