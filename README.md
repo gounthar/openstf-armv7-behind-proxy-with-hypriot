@@ -37,30 +37,30 @@ I'm using DHCP, so I had to find the IP of the Raspi to change the configuration
 
 ```
 ifconfig
-docker0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt; mtu 1500
+docker0: flags=4099<UP,BROADCAST,MULTICAST> mtu 1500
  inet 172.17.0.1 netmask 255.255.0.0 broadcast 172.17.255.255
  ether 02:42:b0:d0:bf:fa txqueuelen 0 (Ethernet)
  RX packets 0 bytes 0 (0.0 B)
  RX errors 0 dropped 0 overruns 0 frame 0
  TX packets 0 bytes 0 (0.0 B)
  TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500
  inet ip.of.your.raspberry netmask 255.255.248.0 broadcast ip.of.your.broadcast
- inet6 fe80::1096:713d:a542:dfbb prefixlen 64 scopeid 0x20&lt;link&gt;
+ inet6 fe80::1096:713d:a542:dfbb prefixlen 64 scopeid 0x20<link>
  ether b8:27:eb:4b:11:0d txqueuelen 1000 (Ethernet)
  RX packets 7423 bytes 1021610 (997.6 KiB)
  RX errors 0 dropped 22 overruns 0 frame 0
  TX packets 291 bytes 50988 (49.7 KiB)
  TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt; mtu 65536
+lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536
  inet 127.0.0.1 netmask 255.0.0.0
- inet6 ::1 prefixlen 128 scopeid 0x10&lt;host&gt;
+ inet6 ::1 prefixlen 128 scopeid 0x10<host>
  loop txqueuelen 1000 (Local Loopback)
  RX packets 70 bytes 5718 (5.5 KiB)
  RX errors 0 dropped 0 overruns 0 frame 0
  TX packets 70 bytes 5718 (5.5 KiB)
  TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt; mtu 1500
+wlan0: flags=4099<UP,BROADCAST,MULTICAST> mtu 1500
  ether b8:27:eb:1e:44:58 txqueuelen 1000 (Ethernet)
  RX packets 0 bytes 0 (0.0 B)
  RX errors 0 dropped 0 overruns 0 frame 0
@@ -176,11 +176,11 @@ As everything now looks in order, we can launch openSTF:
 docker-compose up --build
 Pulling adb (mitchtech/arm-adb:)...
 latest: Pulling from mitchtech/arm-adb
-991507d4dcc6: Downloading \[=====&gt; \] 3.385MB/32.88MB
+991507d4dcc6: Downloading \[=====> \] 3.385MB/32.88MB
 2ad44321f88a: Download complete
 2f39bd897657: Download complete
 a3ed95caeb02: Download complete
-38949773330c: Downloading \[======&gt; \] 1.702MB/12.22MB
+38949773330c: Downloading \[======> \] 1.702MB/12.22MB
 a6ac660d9104: Download com
 ### Launching openSTF
 ```
