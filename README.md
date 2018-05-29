@@ -279,6 +279,6 @@ et
 
 and… Tadaam :
 
-<img src="Pictures/10000000000001A4000001A358E952380368EBED.png" width="420" height="418" />
+<img src="10000000000001A4000001A358E952380368EBED.png" width="420" height="418" />
 
 
