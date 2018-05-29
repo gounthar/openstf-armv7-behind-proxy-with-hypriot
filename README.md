@@ -192,12 +192,32 @@ In the [openstf-arm7-docker](https://github.com/jonathas/openstf-arm7-docker) th
 So, 
 - change the IP with the one you found with `ifconfig` earlier.
 - copy the docker-infra.service file from the systemd directory to /etc/systemd/system `$ sudo cp systemd/docker-infra.service /etc/systemd/system`
-- Reload the daemons: `sudo systemctl daemon-reload`
-- Enable the service: `sudo systemctl enable docker-infra`
+- modify it so that it corresponds to your directory: 
 
-- Start everything: sudo systemctl start docker-infra
+```
+vi systemd/docker-infra.service
+HypriotOS/armv7: pirate@black-pearl in /DATA/openstf-arm7-docker
+$ cat !$
+cat systemd/docker-infra.service
+[Unit]
+Description=Docker infra
+Requires=docker.service
+After=docker.service
 
-After everything is loaded, your server will be available on http://&lt; the ip address you configured &gt;:7100
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /DATA/openstf-arm7-docker/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /DATA/openstf-arm7-docker/docker-compose.yml stop
+
+[Install]
+WantedBy=default.target
+```
+
+- reload the daemons: `sudo systemctl daemon-reload`
+- enable the service: `sudo systemctl enable docker-infra`
+- start everything: `sudo systemctl start docker-infra`
+
+After everything is loaded, your server will be available on http://ip.of.your.raspberry:7100
 
 So :
 
