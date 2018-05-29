@@ -97,16 +97,20 @@ We will then be able to install curl-config:
 sudo -E apt-get update && apt-get install --reinstall libcurl4-openssl-dev
 ```
 
+This will be needed later on to accept github certificate (or try to).
+
 ### <span id="anchor-5"></span>Certificates
+The first time I tried to clone the openSTF armv7 repo, I got an error saying my certificates could not be found.
+Of course, [Stackoverflow](https://stackoverflow.com/questions/21181231/server-certificate-verification-failed-cafile-etc-ssl-certs-ca-certificates-c) got it covered.
+So I tried
 
-<https://stackoverflow.com/questions/21181231/server-certificate-verification-failed-cafile-etc-ssl-certs-ca-certificates-c>
-
+```
 hostname=github.com
-
 port=443
+trust_cert_file_location=`curl-config --ca`
+```
 
-*trust\_cert\_file\_location=\`curl-config --ca\`*
-
+We'll try to import the github certificate on our machine. If you also have a proxy, put it on the command line:
 **$ **sudo bash -c "echo -n | openssl s\_client -proxy your.proxy.host:proxyPort -showcerts -connect $hostname:$port \\
 
  2&gt;/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \\
