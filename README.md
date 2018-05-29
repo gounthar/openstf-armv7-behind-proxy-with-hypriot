@@ -122,77 +122,68 @@ If you don't need any proxy, just get rid of the `-proxy` part.
 As it is not working yet, we do `export GIT_SSL_NO_VERIFY=1` which is not an pretty solution. We will have to investigate later on.
 The solution to this issue is written somewhere in [https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed](https://stackoverflow.com/questions/42616392/unable-to-correct-sudden-server-certificate-verification-failed)* or [https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116\#35824116](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed/35824116#35824116).
 
+Now, we can at last clone the repo:
+
+```
 HypriotOS/armv7: pirate@black-pearl in /DATA
-
-ALL\_PROXY=http://your.proxy.host:proxyPort git clone https://github.com/jonathas/openstf-arm7-docker
-
+ALL_PROXY=http://your.proxy.host:proxyPort git clone https://github.com/jonathas/openstf-arm7-docker
 Cloning into 'openstf-arm7-docker'...
-
 remote: Counting objects: 10, done.
-
 remote: Total 10 (delta 0), reused 0 (delta 0), pack-reused 10
-
 Unpacking objects: 100% (10/10), done.
+```
 
 ### <span id="anchor-6"></span>Proxy for Docker
+The repo is now available, but we will need to configure Docker to use the proxy because it won't be able to download the images:
 
-**$ **docker-compose up --build
-
+```
+docker-compose up --build
 Pulling adb (mitchtech/arm-adb:)...
-
 ERROR: Get https://registry-1.docker.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+```
 
-**$ **sudo mkdir -p /etc/systemd/system/docker.service.d/
+We will have to create a docker.service.d directory in which we will create http-proxy.conf and https-proxy.conf.
 
-HypriotOS/armv7: pirate**@**black-pearl** in **/DATA/openstf-arm7-docker
-
-**$ **sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
-
-HypriotOS/armv7: pirate**@**black-pearl** in **/DATA/openstf-arm7-docker
-
-**$ **sudo vi /etc/systemd/system/docker.service.d/https-proxy.conf
-
-HypriotOS/armv7: pirate**@**black-pearl** in **/DATA/openstf-arm7-docker
-
-**$ **cat !$
-
+```
+sudo mkdir -p /etc/systemd/system/docker.service.d/
+sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
+sudo vi /etc/systemd/system/docker.service.d/https-proxy.conf
 cat /etc/systemd/system/docker.service.d/https-proxy.conf
+[Service]
+Environment="HTTPS_PROXY=http://your.proxy.host:proxyPort"
+```
 
-\[Service\]
+Then we can ask Docker daemon to reload the config:
 
-Environment="HTTPS\_PROXY=http://your.proxy.host:proxyPort"
+```
+sudo systemctl daemon-reload
+```
 
-**$ **sudo systemctl daemon-reload
+and if it doesn't work yet (which should not happen), we can restart Docker:
 
-HypriotOS/armv7: pirate**@**black-pearl** in **/DATA/openstf-arm7-docker
+```
+sudo systemctl restart docker
+```
+We can then check that the properties have been taken into account:
 
-**$ **sudo systemctl restart docker
+```
+systemctl show --property=Environment docker
+Environment=HTTP_PROXY=http://your.proxy.host:proxyPort HTTPS_PROXY=http://your.proxy.host:proxyPort
+```
+As everything now looks in order, we can launch openSTF:
 
-HypriotOS/armv7: pirate**@**black-pearl** in **/DATA/openstf-arm7-docker
-
-**$ **systemctl show --property=Environment docker
-
-Environment=HTTP\_PROXY=http://your.proxy.host:proxyPort HTTPS\_PROXY=http://your.proxy.host:proxyPort
-
-$ docker-compose up --build
-
+```
+docker-compose up --build
 Pulling adb (mitchtech/arm-adb:)...
-
 latest: Pulling from mitchtech/arm-adb
-
 991507d4dcc6: Downloading \[=====&gt; \] 3.385MB/32.88MB
-
 2ad44321f88a: Download complete
-
 2f39bd897657: Download complete
-
 a3ed95caeb02: Download complete
-
 38949773330c: Downloading \[======&gt; \] 1.702MB/12.22MB
-
 a6ac660d9104: Download com
-
 ### Launching openSTF
+```
 
 **$ **ifconfig
 
