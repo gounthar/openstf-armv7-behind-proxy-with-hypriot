@@ -187,26 +187,13 @@ a6ac660d9104: Download com
 
 We can stop it, as we still have some configuration to do.
 In the [openstf-arm7-docker](https://github.com/jonathas/openstf-arm7-docker) the Readme reads:
-
-# Smartphone Test Farm using Docker on Raspberry Pi
-
-This docker-compose config contains [openstf](https://openstf.io/), rethinkdb and [adb](https://developer.android.com/studio/command-line/adb.html).
-
-In order to use it:
-
-- Install Docker and [docker-compose](https://docs.docker.com/compose/install/)
-
 - Open the docker-compose.yml file and **edit the ip address there, entering your server's ip address instead**
 
-So, change the IP with the one you found with `ifconfig` earlier.
-
-- Leave the docker-compose.yml file inside your home directory (/home/pi)
-
-- Copy the docker-infra.service file from the systemd directory to /etc/systemd/system
-
-- Reload the daemons: sudo systemctl daemon-reload
-
-- Enable the service: sudo systemctl enable docker-infra
+So, 
+- change the IP with the one you found with `ifconfig` earlier.
+- copy the docker-infra.service file from the systemd directory to /etc/systemd/system `$ sudo cp systemd/docker-infra.service /etc/systemd/system`
+- Reload the daemons: `sudo systemctl daemon-reload`
+- Enable the service: `sudo systemctl enable docker-infra`
 
 - Start everything: sudo systemctl start docker-infra
 
