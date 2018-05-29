@@ -185,47 +185,20 @@ a6ac660d9104: Download com
 ### Launching openSTF
 ```
 
-**$ **ifconfig
+We can stop it, as we still have some configuration to do.
+In the [openstf-arm7-docker](https://github.com/jonathas/openstf-arm7-docker) the Readme reads:
 
-docker0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt; mtu 1500
+# Smartphone Test Farm using Docker on Raspberry Pi
 
- inet 172.17.0.1 netmask 255.255.0.0 broadcast 172.17.255.255
-
- ether 02:42:b0:d0:bf:fa txqueuelen 0 (Ethernet)
-
- RX packets 0 bytes 0 (0.0 B)
-
- RX errors 0 dropped 0 overruns 0 frame 0
-
- TX packets 0 bytes 0 (0.0 B)
-
- TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-
-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500
-
- inet ip.of.your.raspberry netmask 255.255.248.0 broadcast ip.of.your.broadcast
-
- inet6 fe80::1096:713d:a542:dfbb prefixlen 64 scopeid 0x20&lt;link&gt;
-
- ether b8:27:eb:4b:11:0d txqueuelen 1000 (Ethernet)
-
- RX packets 1897164 bytes 573876867 (547.2 MiB)
-
- RX errors 0 dropped 22 overruns 0 frame 0
-
- TX packets 1080202 bytes 64923611 (61.9 MiB)
-
- TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-
-\# Smartphone Test Farm using Docker on Raspberry Pi
-
-This docker-compose config contains \[openstf\](https://openstf.io/), rethinkdb and \[adb\](https://developer.android.com/studio/command-line/adb.html).
+This docker-compose config contains [openstf](https://openstf.io/), rethinkdb and [adb](https://developer.android.com/studio/command-line/adb.html).
 
 In order to use it:
 
-- Install Docker and \[docker-compose\](https://docs.docker.com/compose/install/)
+- Install Docker and [docker-compose](https://docs.docker.com/compose/install/)
 
-- Open the docker-compose.yml file and edit the ip address there, entering your server's ip address instead
+- Open the docker-compose.yml file and **edit the ip address there, entering your server's ip address instead**
+
+So, change the IP with the one you found with `ifconfig` earlier.
 
 - Leave the docker-compose.yml file inside your home directory (/home/pi)
 
